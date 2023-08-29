@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Test </title>
+    </head>
+    <body>
+        <h1> Exhibition </h1>
+        <ul id="exhibitions-list"></ul>
+        <script>
+            const apikey = "inN6GxbgKKSK9GyTb8KAVYsgLPcN4t9l";
+
+            const nmaAPI ="https://data.nma.gov.au/object?title=*";
+
+
+            async function getExhibitions() 
+            {
+                const exhListItem = document.getElementById('exhibitions-list')
+                try 
+                {
+                    const response = await fetch(nmaAPI);
+                    const data = await response.json();
+
+                    console.log(data); 
+
+                    data.data.forEach(item => {
+                        console.log(item);
+                        const ListItem = document.createElement('li');
+                        ListItem.textContent = item.title;
+
+                        exhListItem.appendChild(ListItem);
+                    })
+
+                } catch(error) 
+                {
+                    console.log('error: ', error);
+                }
+            }
+            getExhibitions()
+        </script>
+    </body>
+</html>
